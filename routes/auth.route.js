@@ -7,7 +7,7 @@ const {JWT_SECRET, JWT_EXPIRY} = require('../config');
 
 const authRouter = express.Router();
 
-function createJwtToken = (user) => {
+function createJwtToken(user) {
   return jwt.sign({user}, JWT_SECRET, {
     subject: user.username,
     expiresIn: JWT_EXPIRY,
