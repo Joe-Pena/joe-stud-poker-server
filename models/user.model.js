@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
   password: {type: String, required: true},
   hands: {type: Object, default: {
     royalFlush: 0,
-    fiveOfAKind: 0,
     straightFlush: 0,
     fourOfAKind: 0,
     fullHouse: 0,
