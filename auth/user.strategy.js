@@ -1,4 +1,4 @@
-const passport = require(passport);
+const passport = require('passport');
 const {Strategy: LocalStrategy} = require('passport-local');
 const {Strategy: JwtStrategy, ExtractJwt} = require('passport-jwt');
 
@@ -50,8 +50,8 @@ const jwtStrategy = new JwtStrategy(
   }
 );
 
-const localPassportMiddleware = passport.aunthenticate('local', {session: false});
-const jwtPassportMiddleware = passport.aunthenticate('jwt', {session: false});
+const localPassportMiddleware = passport.authenticate('local', {session: false});
+const jwtPassportMiddleware = passport.authenticate('jwt', {session: false});
 
 module.exports = {
   localStrategy,
