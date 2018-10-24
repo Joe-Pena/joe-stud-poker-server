@@ -24,7 +24,7 @@ passport.use(jwtStrategy);  //Use jwtStrategy when receiving JWTs
 app.use(express.static('../public'))
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(cors);
+app.use(cors());
 
 //Router Mounting
 app.use('/api/users', userRouter);
