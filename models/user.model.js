@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     pair: 0,
     totalHands: 0,
   }},
-  chips: {type: Number, default: 0},
+  chips: {type: Number, default: 2000},
   hiStake: {type: Number, default: 0},
   hiWin: {type: Number, default: 0},
 });
