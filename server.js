@@ -29,6 +29,8 @@ app.use(cors);
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 
+startServer(); //*** */
+
 //START SERVER
 function startServer() {
   return new Promise((resolve, reject) => {
