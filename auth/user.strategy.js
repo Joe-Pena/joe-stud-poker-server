@@ -5,13 +5,14 @@ const {Strategy: JwtStrategy, ExtractJwt} = require('passport-jwt');
 const {User} = require('../models/user.model');
 const {JWT_SECRET} = require('../config');
 
-const localStrategy = new LocalStrategy((username, password, passportVeriry) => {
+const localStrategy = new LocalStrategy((username, password, passportVerify) => {
   let user;
 
   User.findOne({username}).then(_user => {
     user = _user;
 
     if (!user) {
+      console.log('user not found');
       return Promise.reject({
         reason: 'Login Error',
         error: 'Incorrect username and/or password'
@@ -22,19 +23,21 @@ const localStrategy = new LocalStrategy((username, password, passportVeriry) => 
   })
   .then(isValid => {
     if (!isValid) {
+      console.log('passport not matching');
       return Promise.reject({
         reason: 'Login Error',
         error: 'Incorrect username and/or password'
       });
     }
 
-    return passportVeriry(null, user);
+    return passportVerify(null, user);
   })
   .catch(err => {
+    console.log(err);
     if(err.reason === 'Login Error') {
-      return passportVeriry(null, false, err.message);
+      return passportVerify(null, false, err.message);
     }
-    return passportVeriry(null, false);
+    return passportVerify(null, false);
   });
 });
 
