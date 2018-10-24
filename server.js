@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -28,15 +29,15 @@ app.use(cors);
 //Router Mounting
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
-
-startServer(); //*** */
+ //*** */
 
 //START SERVER
 function startServer() {
   return new Promise((resolve, reject) => {
     mongoose.connect(DATABASE_URL, {useNewUrlParser: true}, err => {
+      console.log('dburl:', DATABASE_URL);
       if(err) {
-        Promise.reject();
+        reject(err);
       }
 
       server = app.listen(PORT, () => {
@@ -62,6 +63,7 @@ function stopServer() {
   })
 }
 
+startServer().catch(err => console.log(err));
 module.exports = {
   startServer,
   stopServer,
