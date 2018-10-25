@@ -17,11 +17,11 @@ userRouter.put('/:id', jwtPassportMiddleware, (req, res) => {
   };
 
   User.findOneAndUpdate({_id: id}, updateInfo)
-    .then(res => {
-      return res.status(204).json();
+    .then(response => {
+      res.status(204).json(response);
     })
     .catch(err => {
-      return res.status(500).json();
+      return res.status(500).json(err.message);
     });
 });
 
