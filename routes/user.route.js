@@ -8,10 +8,21 @@ const userRouter = express.Router();
 
 //UPDATE USER INFORMATION
 userRouter.put('/:id', jwtPassportMiddleware, (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   updateInfo = {
-    
-  }
+    hands: req.body.hands,
+    chips: req.body.chips,
+    hiStake: req.body.hiStake,
+    hiWin: req.body.hiWin,
+  };
+
+  User.findOneAndUpdate({_id: id}, updateInfo)
+    .then(res => {
+      return res.status(204).json();
+    })
+    .catch(err => {
+      return res.status(500).json();
+    });
 });
 
 //CREATE USER
