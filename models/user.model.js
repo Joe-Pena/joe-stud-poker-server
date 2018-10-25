@@ -28,6 +28,10 @@ userSchema.methods.serialize = function() {
     id: this._id,
     username: this.username,
     email: this.email,
+    hands: this.hands,
+    chips: this.chips,
+    hiStake: this.hiStake,
+    hiWin: this.hiWin,
   });
 };
 

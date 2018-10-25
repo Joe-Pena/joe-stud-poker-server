@@ -2,8 +2,17 @@ const express = require('express');
 const Joi = require('joi');
 
 const {User, userJoiSchema} = require('../models/user.model');
+const {jwtPassportMiddleware} = require('../auth/user.strategy');
 
 const userRouter = express.Router();
+
+//UPDATE USER INFORMATION
+userRouter.put('/:id', jwtPassportMiddleware, (req, res) => {
+  const { id } = req.body;
+  updateInfo = {
+    
+  }
+});
 
 //CREATE USER
 userRouter.post('/', (req, res, next) => {
