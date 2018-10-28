@@ -6,14 +6,22 @@ const {jwtPassportMiddleware} = require('../auth/user.strategy');
 
 const userRouter = express.Router();
 
+userRouter.get('/', jwtPassportMiddleware, (req, res) => {
+  User.find()
+    .then(response => {
+      res.json(response.length);
+    })
+    .catch(err => {
+      return res.status(500).json(err.message);
+    })
+})
+
 //UPDATE USER INFORMATION
 userRouter.put('/:id', jwtPassportMiddleware, (req, res) => {
   const { id } = req.params;
   updateInfo = {
-    hands: req.body.hands,
-    chips: req.body.chips,
-    hiStake: req.body.hiStake,
-    hiWin: req.body.hiWin,
+    username: req.body.username,
+    email: req.body.email
   };
 
   User.findOneAndUpdate({_id: id}, updateInfo)
@@ -63,6 +71,20 @@ userRouter.post('/', (req, res, next) => {
         res.status(500).json(err);
       });
   });
+});
+
+userRouter.delete('/:id', jwtPassportMiddleware, (req, res) => {
+  const {id} = req.body;
+
+  if(id === req.user.id) {
+  User.findByIdAndDelete(id)
+    .then(response => {
+      return res.status(204).json(response);
+    })
+    .catch(err => res.status(500).json(err.message));
+  } else {
+    return res.status(400).json('Account does not match with your own');
+  }
 });
 
 module.exports = userRouter;
