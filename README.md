@@ -23,6 +23,10 @@ https://stud-poker-server.herokuapp.com/
   PUT: Update user information by making a PUT request. A valid JWT bearer token is required aswell as a valid user id in the request parameters. The JSON body can have the following properties:
 
     "username": "UPDATE_USERNAME",
-    "email": "UPDATE_EMAIL"
+    "email": "UPDATE_EMAIL",
+    "hands": "HAND_COUNT",
+    "chips": "AMOUNT_OF_CHIPS",
+    "hiStake": "HIGHEST_STAKE",
+    "hiWin": "HIGHEST_WIN",
 
   DELETE: Delete your own account by sending a DELETE request to the /api/users/:id, where your user id is the in the request parameters. The id in the parameter MUST match your own account's id.

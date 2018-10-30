@@ -21,7 +21,11 @@ userRouter.put('/:id', jwtPassportMiddleware, (req, res) => {
   const { id } = req.params;
   updateInfo = {
     username: req.body.username,
-    email: req.body.email
+    email: req.body.email,
+    hands: req.body.hands,
+    chips: req.body.chips,
+    hiStake: req.body.hiStake,
+    hiWin: req.body.hiWin,
   };
 
   User.findOneAndUpdate({_id: id}, updateInfo)
