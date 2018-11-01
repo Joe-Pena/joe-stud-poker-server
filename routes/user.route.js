@@ -9,7 +9,19 @@ const userRouter = express.Router();
 userRouter.get('/', jwtPassportMiddleware, (req, res) => {
   User.find()
     .then(response => {
-      res.json(response.length);
+      res.json(response);
+    })
+    .catch(err => {
+      return res.status(500).json(err.message);
+    })
+});
+
+userRouter.get('/:id', jwtPassportMiddleware, (req, res) => {
+  const { id } = req.params;
+
+  User.findOne({_id: id})
+    .then(response => {
+      res.json(response);
     })
     .catch(err => {
       return res.status(500).json(err.message);
@@ -78,10 +90,10 @@ userRouter.post('/', (req, res, next) => {
 });
 
 userRouter.delete('/:id', jwtPassportMiddleware, (req, res) => {
-  const {id} = req.body;
+  const {id} = req.params;
 
-  if(id === req.user.id) {
-  User.findByIdAndDelete(id)
+  if(id === req.user._id) {
+  User.findOneAndRemove({_id: id})
     .then(response => {
       return res.status(204).json(response);
     })
