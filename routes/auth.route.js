@@ -21,7 +21,7 @@ authRouter.post('/login', localPassportMiddleware, (req, res) => {
   res.json({jwtToken, user});
 });
 
-authRouter.post('./refresh', jwtPassportMiddleware, (req, res) => {
+authRouter.post('/refresh', jwtPassportMiddleware, (req, res) => {
   const user = req.user.serialize();
   const jwtToken = createJwtToken(user);
   res.json({jwtToken, user});
