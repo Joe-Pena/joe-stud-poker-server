@@ -27,7 +27,7 @@ authRouter.post('/refresh', jwtPassportMiddleware, (req, res) => {
   let jwtToken;
   let user;
   User.findOne({_id: pUser.id})
-  .then(resUser => user = resUser)
+  .then(resUser => user = resUser.serialize())
   .then(() => {
     jwtToken = createJwtToken(user);
     res.json({jwtToken, user});
