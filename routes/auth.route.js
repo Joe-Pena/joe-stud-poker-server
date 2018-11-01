@@ -23,12 +23,12 @@ authRouter.post('/login', localPassportMiddleware, (req, res) => {
 });
 
 authRouter.post('/refresh', jwtPassportMiddleware, (req, res) => {
-  const user = req.user;
+  const pUser = req.user;
   const jwtToken = createJwtToken(user);
-  let newUser;
-  User.findOne({_id: user.id})
-  .then(resUser => newUser = resUser)
-  .then(() => res.json({jwtToken, newUser}))
+  let user;
+  User.findOne({_id: pUser.id})
+  .then(resUser => user = resUser)
+  .then(() => res.json({jwtToken, user}))
   .catch(err => console.log(err.message));
 
   // res.json({jwtToken, newUser});
